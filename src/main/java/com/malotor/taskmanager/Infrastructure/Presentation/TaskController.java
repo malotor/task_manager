@@ -1,12 +1,15 @@
 package com.malotor.taskmanager.Infrastructure.Presentation;
 
+import com.malotor.taskmanager.Application.DataTransform.DataTransform;
 import com.malotor.taskmanager.Domain.Task;
 import com.malotor.taskmanager.Domain.TaskDTO;
-import com.malotor.taskmanager.Domain.TaskId;
+import com.malotor.taskmanager.Domain.TaskRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -14,20 +17,23 @@ import java.util.List;
 @RestController
 public class TaskController {
 
-    List<TaskDTO> tasks = new ArrayList<TaskDTO>();
+    private final TaskRepository taskRepository;
+    private final List<TaskDTO> tasks = new ArrayList<TaskDTO>();
+
+    @Autowired
+    public TaskController(TaskRepository taskRepository) {
+        this.taskRepository = taskRepository;
+    }
 
     @RequestMapping("/tasks")
-    List<TaskDTO>  taskList()
+    Collection<Task> taskList()
     {
 
-        this.tasks.add(new TaskDTO(new Task(
-                new TaskId("An Id"),
-                "A task Name",
-                "A task description",
-                new Date())
-        ));
+        DataTransform dataTransform = new DataTransform();
 
-        return this.tasks;
+        dataTransform.write(this.taskRepository.fetchAll());
+
+        return dataTransform.read();
     }
 
 }
