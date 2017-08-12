@@ -9,8 +9,8 @@ import java.util.Date;
 import java.util.HashSet;
 
 
-public class InMemoryTaskRepository implements TaskRepository{
-
+public class InMemoryTaskRepository {
+    /*
 
     @Override
     public Task fetchById(String id) {
@@ -33,4 +33,5 @@ public class InMemoryTaskRepository implements TaskRepository{
 
         return collection;
     }
+    */
 }

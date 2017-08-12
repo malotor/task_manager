@@ -1,9 +1,8 @@
 package com.malotor.taskmanager.Domain;
 
-import java.util.Collection;
+import org.springframework.data.repository.CrudRepository;
 
-public interface TaskRepository {
+public interface TaskRepository extends CrudRepository<Task, Long> {
 
-    Task fetchById(String id);
-    Collection<Task> fetchAll();
+
 }
