@@ -2,49 +2,73 @@ package com.malotor.taskmanager.Domain;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Transient;
+
+@Entity
 public class Task {
 
-    private TaskId $id;
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Long id;
 
-    private String $name;
+    @Transient
+    private TaskId taskId;
 
-    private String $description;
+    private String name;
 
-    private Date $dueDate;
+    private String description;
+
+    private Date dueDate;
 
 
-    public Task(TaskId $id, String $name, String $description, Date $dueDate) {
-        this.$id = $id;
-        this.$name = $name;
-        this.$description = $description;
-        this.$dueDate = $dueDate;
+    public Task(String name, String description, Date dueDate) {
+        //this.id = id;
+        this.name = name;
+        this.description = description;
+        this.dueDate = dueDate;
     }
 
-    public TaskId get$id() {
-        return $id;
+    // JPA
+    protected Task() {}
+
+    public Long getId() {
+
+        return id;
     }
 
-    public String get$name() {
-        return $name;
+
+    public String getName() {
+        return name;
     }
 
-    public String get$description() {
-        return $description;
+    public String getDescription() {
+        return description;
     }
 
-    public Date get$dueDate() {
-        return $dueDate;
+    public Date getDueDate() {
+        return dueDate;
     }
 
-    /* SUBROGATED ID
 
-     public TaskId taskId() {
 
-     if (null === taskId) {
-     this.taskId = new TaskId(this.id());
-     }
+    public TaskId getTaskId() {
 
-     return this.taskId;
-     }
-     */
+         if (null == taskId) {
+            taskId = new TaskId(this.getId().toString());
+         }
+
+         return taskId;
+    }
+
+
+    @Override
+    public String toString() {
+        return String.format(
+                "Task[id=%d, name='%s', lastName='%s']",
+                id, name);
+    }
 }
