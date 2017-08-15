@@ -2,11 +2,7 @@ package com.malotor.taskmanager.Domain;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
 @Entity
 public class Task {
@@ -24,12 +20,14 @@ public class Task {
 
     private Date dueDate;
 
+    @Embedded
+    private UserId user;
 
-    public Task(String name, String description, Date dueDate) {
-        //this.id = id;
+    public Task(String name, String description, Date dueDate, UserId user) {
         this.name = name;
         this.description = description;
         this.dueDate = dueDate;
+        this.user = user;
     }
 
     // JPA
@@ -52,7 +50,6 @@ public class Task {
     public Date getDueDate() {
         return dueDate;
     }
-
 
 
     public TaskId getTaskId() {

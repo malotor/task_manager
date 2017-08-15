@@ -1,4 +1,4 @@
-package com.malotor.taskmanager.Application.DataTransform;
+package com.malotor.taskmanager.Application.DataTransform.DataTransformer;
 
 import com.malotor.taskmanager.Domain.Task;
 

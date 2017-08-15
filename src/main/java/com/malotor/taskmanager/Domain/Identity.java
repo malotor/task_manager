@@ -12,4 +12,9 @@ abstract public class Identity {
     {
         return this.value;
     }
+
+    @Override
+    public String toString() {
+        return this.id();
+    }
 }

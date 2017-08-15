@@ -1,24 +1,17 @@
-package com.malotor.taskmanager.Infrastructure.Presentation;
+package com.malotor.taskmanager.Application.DataTransform.Query;
 
 import com.malotor.taskmanager.Application.DataTransform.DataTransformer.TaskDataTransform;
-import com.malotor.taskmanager.Domain.Task;
 import com.malotor.taskmanager.Domain.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Collection;
-import java.util.Date;
+import java.util.ArrayList;
 
-
-@RestController
-public class TaskController {
+public class FetchAllTasksQueryHandler {
 
     @Autowired
     private TaskRepository taskRepository;
 
-    @RequestMapping("/tasks")
-    Collection<Task> taskList()
+    public ArrayList handle(FetchAllTasksQuery $query)
     {
 
         TaskDataTransform taskDataTransform = new TaskDataTransform();
@@ -27,6 +20,4 @@ public class TaskController {
 
         return taskDataTransform.read();
     }
-
-
 }

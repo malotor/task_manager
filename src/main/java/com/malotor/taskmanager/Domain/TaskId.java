@@ -6,8 +6,4 @@ public class TaskId extends Identity {
         super(value);
     }
 
-    @Override
-    public String toString() {
-        return this.id();
-    }
 }
